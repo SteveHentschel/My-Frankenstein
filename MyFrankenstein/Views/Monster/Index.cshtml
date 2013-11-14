@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MyFrankenstein.Models.Monster>
+
+@{
+    ViewBag.Title = "Monster List";
+}
+
+<h2>Monster List</h2>
+
+<p>
+    @if(Request.IsAuthenticated) {
+        @Html.ActionLink("Create New Monster", "Create")
+    }
+    else
+    {
+        <text>Please @Html.ActionLink("Log On", "LogOn", "Account") to create or modify Monster entries.</text>
+    }
+</p>
+
+
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Family
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            ImgUrl
+        </th>
+        <th>
+            ImgName
+        </th>
+        <th>
+            Contributor
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Family)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImgUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImgName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contributor)
+        </td>
+        <td>
+            @if(Request.IsAuthenticated && User.Identity.Name == item.Contributor) {
+                <text>@Html.ActionLink("Edit", "Edit", new { id = item.MonsterID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MonsterID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MonsterID })</text>
+            }
+            else {
+                <text>Edit | @Html.ActionLink("Details", "Details", new { id = item.MonsterID }) | Delete</text>
+            }
+        </td>
+    </tr>
+}
+
+</table>

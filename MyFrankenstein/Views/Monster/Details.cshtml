@@ -1,0 +1,51 @@
+﻿@model MyFrankenstein.Models.Monster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Monster</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Family</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Family)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">ImgUrl</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImgUrl)
+    </div>
+
+    <div class="display-label">ImgName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImgName)
+    </div>
+
+    <div class="display-label">Contributor</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Contributor)
+    </div>
+</fieldset>
+<p>
+    @if (Request.IsAuthenticated && User.Identity.Name == Model.Contributor)
+    {
+        <text>@Html.ActionLink("Edit", "Edit", new { id=Model.MonsterID }) |
+        @Html.ActionLink("Back to List", "Index")</text>
+    }
+    else  {
+        <text>Edit | @Html.ActionLink("Back to List", "Index")</text>
+    }
+</p>
