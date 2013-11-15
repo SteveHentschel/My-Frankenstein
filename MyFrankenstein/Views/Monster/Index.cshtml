@@ -20,6 +20,9 @@
 <table>
     <tr>
         <th>
+            Imgthumb
+        </th>
+        <th>
             Name
         </th>
         <th>
@@ -27,12 +30,6 @@
         </th>
         <th>
             Description
-        </th>
-        <th>
-            ImgUrl
-        </th>
-        <th>
-            ImgName
         </th>
         <th>
             Contributor
@@ -44,6 +41,9 @@
 {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.ImgThumb)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
@@ -51,12 +51,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImgUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImgName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Contributor)

@@ -19,19 +19,12 @@
         @Html.DisplayFor(model => model.Family)
     </div>
 
+    <img src="@Url.Content("~/Content/Images/"+Model.ImgName)" alt="<No Image>" width="300px" />
+    @Model.ImgName
+
     <div class="display-label">Description</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">ImgUrl</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImgUrl)
-    </div>
-
-    <div class="display-label">ImgName</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImgName)
     </div>
 
     <div class="display-label">Contributor</div>
@@ -42,10 +35,11 @@
 <p>
     @if (Request.IsAuthenticated && User.Identity.Name == Model.Contributor)
     {
-        <text>@Html.ActionLink("Edit", "Edit", new { id=Model.MonsterID }) |
+        <text>@Html.ActionLink("Edit", "Edit", new { id = Model.MonsterID }) |
         @Html.ActionLink("Back to List", "Index")</text>
     }
-    else  {
+    else
+    {
         <text>Edit | @Html.ActionLink("Back to List", "Index")</text>
     }
 </p>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyFrankenstein.Models;
+using System.IO;
 
 namespace MyFrankenstein.Controllers
 { 
@@ -36,20 +37,41 @@ namespace MyFrankenstein.Controllers
         public ActionResult Create()
         {
             return View();
-        } 
+        }
 
         //
         // POST: /Monster/Create
 
         [HttpPost]
-        public ActionResult Create(Monster monster)
+        public ActionResult Create(Monster monster, HttpPostedFileBase file)
         {
+                try
+                {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        monster.ImgName = fileName;
+                        monster.ImgType = Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                        monster.ImgUrl = path;          // Local Url, what's the point to save ?
+
+                        file.SaveAs(path);
+                    }
+                    ViewBag.Message = "Upload successful";
+  //                  return RedirectToAction("Create");
+                }
+                catch
+                {
+                    ViewBag.Message = "Image file upload failed."; 
+                    return View(monster);
+                }
+            
             if (ModelState.IsValid)
             {
                 monster.Contributor = User.Identity.Name;       // add user name to the monster record
                 db.Monsters.Add(monster);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
 
             return View(monster);
@@ -68,11 +90,32 @@ namespace MyFrankenstein.Controllers
         // POST: /Monster/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Monster monster)
+        public ActionResult Edit(Monster monster, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            try
+            {   
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    monster.ImgName = fileName;
+                    monster.ImgType = Path.GetExtension(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    monster.ImgUrl = path;          // Local Url, what's the point to save in DB ?
+
+                    file.SaveAs(path);
+                }
+                ViewBag.Message = "Upload successful";
+                //                  return RedirectToAction("Edit");
+            }
+            catch
             {
-                db.Entry(monster).State = EntityState.Modified;
+                ViewBag.Message = "Image file upload failed.";
+                return View(monster);
+            }
+
+            if (ModelState.IsValid)                                 // Update the record
+            {
+                db.Entry(monster).State = EntityState.Modified; 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

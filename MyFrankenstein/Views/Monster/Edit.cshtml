@@ -9,12 +9,17 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Create", "Monster", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{  
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+
     <fieldset>
-        <legend>Monster</legend>
+        <legend>Monster Edit</legend>
 
         @Html.HiddenFor(model => model.MonsterID)
+        @Html.HiddenFor(model => model.Contributor)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -41,14 +46,6 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ImgUrl)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ImgUrl)
-            @Html.ValidationMessageFor(model => model.ImgUrl)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.ImgName)
         </div>
         <div class="editor-field">
@@ -57,13 +54,14 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ImgType)
+            @Html.LabelFor(model => model.Contributor)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ImgType)
-            @Html.ValidationMessageFor(model => model.ImgType)
+            @Model.Contributor
         </div>
 
+        @Html.HiddenFor(model => model.ImgUrl)
+        @Html.HiddenFor(model => model.ImgType)
         <p>
             <input type="submit" value="Save" />
         </p>
