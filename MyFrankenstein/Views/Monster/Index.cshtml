@@ -12,7 +12,8 @@
     }
     else
     {
-        <text>Please @Html.ActionLink("Log On", "LogOn", "Account") to create or modify Monster entries.</text>
+        <text>Please @Html.ActionLink("Log On", "LogOn", "Account", new { returnUrl = HttpContext.Current.Request.RawUrl }, new { Area = "" })
+        to create or modify Monster entries.</text>
     }
 </p>
 

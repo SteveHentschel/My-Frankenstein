@@ -3,5 +3,5 @@
     [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
 }
 else {
-    @:[ @Html.ActionLink("Log On", "LogOn", "Account") | @Html.ActionLink("Register", "Register", "Account") ]
+    @:[ @Html.ActionLink("Log On", "LogOn", "Account", new { returnUrl = HttpContext.Current.Request.RawUrl }, new { Area = "" }) | @Html.ActionLink("Register", "Register", "Account") ]
 }

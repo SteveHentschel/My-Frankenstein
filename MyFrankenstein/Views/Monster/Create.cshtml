@@ -13,7 +13,7 @@
     new { enctype = "multipart/form-data" } )) 
 {  
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true,"Something is awry.")
 
     <fieldset>
         <legend>New Monster</legend>
