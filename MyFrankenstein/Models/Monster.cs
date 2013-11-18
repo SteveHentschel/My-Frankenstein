@@ -9,23 +9,27 @@ namespace MyFrankenstein.Models
 {
     public class Monster                            // Main monster class 
     {
-        [Key]
+        [Key]                                       // User input Monster fields
         public int MonsterID { get; set; }
-        public string Name { get; set; }
-        public string Family { get; set; }          // type of monster
-        public string Description { get; set; }     // sentence or paragraph descriptor
-        public string ImgUrl { get; set; }          //  < not really needed ? >
-        public string ImgName { get; set; }         // need to load for Details View
-        public string ImgType { get; set; }         //  < not really needed ? >
-        public byte[] ImgThumb { get; set; }        // small thumbnail in db should be ok
-        public string Contributor { get; set; }     // which user submitted the entry
+        [StringLength(30), Required]
+        public string Name { get; set; }            //   Monster name
+        [StringLength(20)]
+        public string Family { get; set; }          //   Type of monster (ie: ghost, etc.)
+        [StringLength(500), Required]
+        public string Description { get; set; }     //   Sentence or paragraph descriptor
+        public string ImgName { get; set; }         //   Image file to upload (via File browser)
+
+        public string ImgUrl { get; set; }          //   Local URL on file server
+        public string ImgType { get; set; }         //   Image file type (only jpg, gif, png allowed)
+        public byte[] ImgThumb { get; set; }        //   Small thumbnail image for index 
+        public string Contributor { get; set; }     //   Creator user (for edit/delete access)
     }
 
-    public class MonsterPics                        // Not sure where to put actual image yet
+    public class MonsterPics                        // Will put image in filesystem (this not needed)
     {
-        public int ImageID { get; set; }            //   may store in files (~/Content/Images/)
-        public byte[] MonsterImage { get; set; }    //   but will make room here in case of DB
-        public int MonsterID { get; set; }          //   link to monster in case in DB
+        public int ImageID { get; set; }            //   but would do this way if storing in DB
+        public byte[] MonsterImage { get; set; }    
+        public int MonsterID { get; set; }          
     }
 
     public class MonsterDBContext : DbContext

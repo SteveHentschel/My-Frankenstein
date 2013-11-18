@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyFrankenstein.Models;
 using System.IO;
+using System.Drawing;
 
 namespace MyFrankenstein.Controllers
 { 
@@ -17,10 +18,18 @@ namespace MyFrankenstein.Controllers
         //
         // GET: /Monster/
 
-        public ViewResult Index()
+        public ViewResult Index()                           // Standard list
         {
             return View(db.Monsters.ToList());
         }
+ 
+        //
+        // GET: /Monster/
+
+        public ViewResult QuickIndex()                      // Special formatted index, for longer lists
+        {                                                   //  sort-able by column, with quick search  
+            return View(db.Monsters.ToList());
+        } 
 
         //
         // GET: /Monster/Details/5
@@ -51,7 +60,7 @@ namespace MyFrankenstein.Controllers
                 monster.ImgName = fileName;
                 monster.ImgType = Path.GetExtension(file.FileName);
 
-                if (!ImageType(monster.ImgType)) {
+                if (!CheckImageType(monster.ImgType)) {
                     ModelState.AddModelError("", "Specified file is not an image type; please try a PNG, GIF, or JPG file.");
                     return View (monster);
                 }
@@ -68,6 +77,9 @@ namespace MyFrankenstein.Controllers
                         var path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
                         monster.ImgUrl = path;          // Local Url, keep for deleting purposes
                         file.SaveAs(path);
+                                                        // Create byte[] thumbnail from file image
+                        Image monsterImg = Image.FromStream(file.InputStream, true, true);
+                        monster.ImgThumb = MakeThumbnail(imageToByteArray(monsterImg), 50, 50);
                     }
                     catch {
                         ModelState.AddModelError("", "Image file upload failed.");
@@ -76,7 +88,7 @@ namespace MyFrankenstein.Controllers
                 }
             }
 
-            if (ModelState.IsValid)                             // default add record, w/ or w/o image
+            if (ModelState.IsValid)                             // finally add record, w/ or w/o image
             {
                 monster.Contributor = User.Identity.Name;       // add user name to the monster record
                 db.Monsters.Add(monster);
@@ -89,12 +101,31 @@ namespace MyFrankenstein.Controllers
             return View(monster);
         }
 
-        public static bool ImageType(string imgExt)             // my humble image ext checker (I saw much fancier on Google)
+        public static bool CheckImageType(string imgExt)        // my humble image ext checker (I saw much fancier on Google)
         {
             var allowedExtensions = new[] { ".png", ".gif", ".jpg", ".jpeg" };
 
             if (allowedExtensions.Contains(imgExt)) return true;
             else return false;
+        }
+
+        public static byte[] MakeThumbnail(byte[] myImage, int thumbWidth, int thumbHeight)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            using (Image thumbnail = Image.FromStream(new MemoryStream(myImage)).GetThumbnailImage(thumbWidth, thumbHeight, null, new IntPtr()))
+            {
+                thumbnail.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        public static byte[] imageToByteArray(Image image)
+        {
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                return ms.ToArray();
+            }
         }
         
         //
@@ -120,7 +151,7 @@ namespace MyFrankenstein.Controllers
                     monster.ImgName = fileName;
                     monster.ImgType = Path.GetExtension(file.FileName);
 
-                    if (!ImageType(monster.ImgType)) {
+                    if (!CheckImageType(monster.ImgType)) {
                         ModelState.AddModelError("", "Specified file is not an image type; please try a PNG, GIF, or JPG file.");
                         return View(monster);
                     }
@@ -135,7 +166,10 @@ namespace MyFrankenstein.Controllers
                     else {
                         var path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
                         try {
-                            file.SaveAs(path);
+                            file.SaveAs(path);              // Save new image file
+                                                            // Create byte[] thumbnail from file image
+                            Image monsterImg = Image.FromStream(file.InputStream, true, true);
+                            monster.ImgThumb = MakeThumbnail(imageToByteArray(monsterImg), 50, 50);
                         }
                         catch {
                             ModelState.AddModelError("", "Image file upload failed.");

@@ -22,7 +22,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.EditorFor(model => model.Name, null, "Name-Family-input", null)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -30,15 +30,15 @@
             @Html.LabelFor(model => model.Family)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Family)
+            @Html.EditorFor(model => model.Family, null, "Name-Family-input", null)
             @Html.ValidationMessageFor(model => model.Family)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+            @Html.LabelFor(model => model.Description)   (500 char max)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+            @Html.EditorFor(model => model.Description, null, "Description-input", null)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
  

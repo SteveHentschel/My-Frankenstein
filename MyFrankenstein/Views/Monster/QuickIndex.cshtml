@@ -1,10 +1,20 @@
 ﻿@model IEnumerable<MyFrankenstein.Models.Monster>
 
 @{
-    ViewBag.Title = "Monster List";
+    ViewBag.Title = "QuickIndex";
 }
 
-<h2>Monster List</h2> 
+@section PageScripts{
+    <link href="/Content/demo_table.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.dataTables.1.8.2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("table").dataTable();
+        });
+    </script>
+}
+
+<h2>Index</h2>  
 
 <p>
     @if(Request.IsAuthenticated) {
@@ -17,13 +27,11 @@
     }
 </p>
 
-@Html.ActionLink("Quick List", "QuickIndex") 
+@Html.ActionLink("Standard List", "Index")
 
-<table>
+<table class="display">
+    <thead>
     <tr>
-        <th>
-            Thumbnail
-        </th>
         <th>
             Name
         </th>
@@ -34,29 +42,38 @@
             Description
         </th>
         <th>
+            Image Name
+        </th>
+        <th>
+            Pic
+        </th>
+        <th>
             Contributor
         </th>
         <th></th>
     </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model)
-{
+@foreach (var item in Model) {
     <tr>
         <td>
-            @if (item.ImgThumb != null) {
-                <img src="data:image;base64,@System.Convert.ToBase64String(item.ImgThumb)" /> }
+            @item.Name
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @item.Family
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Family)
+            @item.Description
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @item.ImgName
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Contributor)
+            @item.ImgThumb
+        </td>
+        <td>
+            @item.Contributor
         </td>
         <td>
             @if(Request.IsAuthenticated && User.Identity.Name == item.Contributor) {
@@ -70,5 +87,6 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>
+

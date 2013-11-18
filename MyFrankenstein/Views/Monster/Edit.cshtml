@@ -20,6 +20,8 @@
 
         @Html.HiddenFor(model => model.MonsterID)
         @Html.HiddenFor(model => model.Contributor)
+        @Html.HiddenFor(model => model.ImgName)
+        @Html.HiddenFor(model => model.ImgThumb)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -59,8 +61,7 @@
             @Model.Contributor
         </div>
 
-        @Html.HiddenFor(model => model.ImgUrl)
-        @Html.HiddenFor(model => model.ImgName)
+        @Html.HiddenFor(model => model.ImgUrl)       
         @Html.HiddenFor(model => model.ImgType)
         <p>
             <input type="submit" value="Save" />
