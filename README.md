@@ -6,7 +6,7 @@ My first pet project: a Monster Database using C# .NET MVC3 w/ SQL Express in Vi
 
 MF Rev 1.3.0 -- (11/18/13)
 - Added Quick Index (list) for longer lists with search function (from J Popovic tutorial)
-- Added thumbnail processing in Create/Edit, also display in regular index.
+- Added thumbnail processing in Create/Edit, also display Thumbs in regular index.
 - Next: working on formatting/beauty now, then time to deploy
 
 MF Rev 1.2.0 -- (11/17/13)
