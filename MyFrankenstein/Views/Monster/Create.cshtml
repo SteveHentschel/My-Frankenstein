@@ -1,7 +1,7 @@
 ﻿@model MyFrankenstein.Models.Monster
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "My Frankenstein - Create";
 }
 
 <h2>Create</h2>
@@ -22,7 +22,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name, null, "Name-Family-input", null)
+            @Html.TextBoxFor(model => model.Name, new { style = "width: 275px;" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -30,38 +30,31 @@
             @Html.LabelFor(model => model.Family)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Family, null, "Name-Family-input", null)
+            @Html.TextBoxFor(model => model.Family, new { style = "width: 275px;" })
             @Html.ValidationMessageFor(model => model.Family)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)   (500 char max)
+            @Html.LabelFor(model => model.Description) 
+            <span style = "font-size: 0.9em; padding-left: 10px">(500 char max)</span>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description, null, "Description-input", null)
+            @Html.TextAreaFor(model => model.Description, new { style = "width: 400px; height: 150px" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
  
         <div class="editor-label">
-            @Html.LabelFor(model => model.ImgName)
+            Upload @Html.LabelFor(model => model.ImgName) ?
         </div>
-        <div class="editor-field"> 
-            @Html.TextBox("file", "", new { type = "file" }) 
+        <div class="editor-field">   
+            @Html.TextBox("file", "", new { type = "file" })  
         </div>          
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Contributor)
-        </div>
-        <div class="editor-field">
-            @User.Identity.Name
-        </div>
-
-        <p>
+        
+        <p style = "margin: 25px 0 0 0"> 
             <input type="submit" value="Create" />
         </p>
     </fieldset>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

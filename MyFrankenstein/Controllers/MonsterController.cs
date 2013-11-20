@@ -175,8 +175,9 @@ namespace MyFrankenstein.Controllers
                             ModelState.AddModelError("", "Image file upload failed.");
                             return View(monster);
                         }
-
-                        System.IO.File.Delete(monster.ImgUrl);          // Delete previous image file
+ 
+                        if (monster.ImgUrl != null)                     // If there was one,
+                            System.IO.File.Delete(monster.ImgUrl);      //   Delete previous image file   
                         monster.ImgUrl = path;                          // Set new file name for db
                     }
                 }

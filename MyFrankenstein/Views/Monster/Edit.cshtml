@@ -27,7 +27,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { style = "width: 275px;" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -35,40 +35,34 @@
             @Html.LabelFor(model => model.Family)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Family)
+            @Html.TextBoxFor(model => model.Family, new { style = "width: 275px;" })
             @Html.ValidationMessageFor(model => model.Family)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Description)
+            <span style = "font-size: 0.9em; padding-left: 10px">(500 char max)</span>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { style = "width: 400px; height: 150px" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImgName): @Model.ImgName
+        <div style="margin: 1em 0 0 0">
+            <strong>Current @Html.LabelFor(model => model.ImgName):</strong>  @Model.ImgName
         </div>
         <div class="editor-field">
-            @Html.TextBox("file", "", new { type = "file" }) 
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Contributor)
-        </div>
-        <div class="editor-field">
-            @Model.Contributor
+            <strong>Change:  </strong>@Html.TextBox("file", "", new { type = "file" }) 
         </div>
 
         @Html.HiddenFor(model => model.ImgUrl)       
         @Html.HiddenFor(model => model.ImgType)
-        <p>
-            <input type="submit" value="Save" />
+
+        <p style = "margin: 25px 0 0 0">
+            <input type="submit" value="Update" />
         </p>
     </fieldset>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

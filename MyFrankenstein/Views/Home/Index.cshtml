@@ -1,25 +1,30 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "My Frankenstein - Home";
 }
 
 <h2>Welcome to <em>My Frankenstein</em>: A Simple Monster Database</h2>
+
+<img src="@Url.Content("~/Content/Images/MF-Welcome-Frank.png")" style="float:right; height:280px" />
 <p>
     This is my first pet project in the C#/.NET MVC realm. I would like to acknowledge 
     <a href="http://slideshare.net/LearnItFirst/how-to-become-a-good-c-programmer" target="_blank">
     Scott Whigham</a> for some initial pointers in an overwhelming subject.  I am slowly, but surely, 
     digging my way out of the 'Trough of Disillusionment'.
 </p>
-<p>
+<h3>Why 'My Frankenstein' ?</h3>
+<ol>
+    <li style="margin: -5px 0 8px 0">
     I call this project 'My Frankenstein' because it is first and foremost, a simple <strong>Monster Repository</strong> to display my basic 
     understanding of the MVC coding style with CRUD operations and an MS SQL database.  Nothing too fancy yet.
     The hardest part was the image storing/viewing.
-</p>
-<p>
+    </li>
+    <li>
     The second reason this site bears the name Frankenstein is for the manner in which I have collected and stitched together
     the ideas, code snippets, templates, and libraries of others into this fairly crude and clunky application, 
     much like the movie monster of old.
-</p>
+    </li>
+</ol>
 <p>
     In any case, take a look around; feel free to login and create a monster record if you like. <br />
-    Check out the @Html.ActionLink("About", "About") page for development specifics or contact info.
+    You can check out the @Html.ActionLink("About", "About") page for development specifics or contact info.
 </p>

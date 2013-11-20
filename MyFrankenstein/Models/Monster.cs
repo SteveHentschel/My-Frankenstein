@@ -17,7 +17,8 @@ namespace MyFrankenstein.Models
         public string Family { get; set; }          //   Type of monster (ie: ghost, etc.)
         [StringLength(500), Required]
         public string Description { get; set; }     //   Sentence or paragraph descriptor
-        public string ImgName { get; set; }         //   Image file to upload (via File browser)
+        [Display(Name="Image File")]
+        public string ImgName { get; set; }         //   Image file to upload (via File Upload browser)
 
         public string ImgUrl { get; set; }          //   Local URL on file server
         public string ImgType { get; set; }         //   Image file type (only jpg, gif, png allowed)

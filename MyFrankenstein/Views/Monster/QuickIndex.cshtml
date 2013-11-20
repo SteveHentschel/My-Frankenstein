@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MyFrankenstein.Models.Monster>
 
 @{
-    ViewBag.Title = "QuickIndex";
+    ViewBag.Title = "My Frankenstein - QuickList";
 }
 
 @section PageScripts{
@@ -13,8 +13,9 @@
         });
     </script>
 }
-
-<h2>Index</h2>  
+<img src="@Url.Content("~/Content/Images/MF-Lists-Frank.jpg")" style="float:right; height:100px" />
+<h2>Monster Quick List</h2> 
+<span id="list-links">@Html.ActionLink("Standard List", "Index")</span>  
 
 <p>
     @if(Request.IsAuthenticated) {
@@ -26,8 +27,6 @@
         to create or modify Monster entries.</text>
     }
 </p>
-
-@Html.ActionLink("Standard List", "Index")
 
 <table class="display">
     <thead>
@@ -42,10 +41,7 @@
             Description
         </th>
         <th>
-            Image Name
-        </th>
-        <th>
-            Pic
+            Image File
         </th>
         <th>
             Contributor
@@ -68,9 +64,6 @@
         </td>
         <td>
             @item.ImgName
-        </td>
-        <td>
-            @item.ImgThumb
         </td>
         <td>
             @item.Contributor

@@ -3,6 +3,11 @@ My-Frankenstein
 
 My first pet project: a Monster Database using C# .NET MVC3 w/ SQL Express in Visual Studio 2010.
 
+MF Rev 1.4.0 -- (11/20/13)
+- Done with beautifying (harder than expected); lots of nit-picky stuff in css and views.
+- Changed color scheme and added static site images.
+- Next/Last: Deploy to new Arvixe hosting site (will be hard, I think). 
+- Site name:  myfrankenstein.net
 
 MF Rev 1.3.0 -- (11/18/13)
 - Added Quick Index (list) for longer lists with search function (from J Popovic tutorial)

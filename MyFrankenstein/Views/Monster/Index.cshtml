@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<MyFrankenstein.Models.Monster>
 
 @{
-    ViewBag.Title = "Monster List";
+    ViewBag.Title = "My Frankenstein - List";
 }
 
+<img src="@Url.Content("~/Content/Images/MF-Lists-Frank.jpg")" style="float:right; height:105px" />
 <h2>Monster List</h2> 
+<span id="list-links">@Html.ActionLink("Quick List", "QuickIndex")</span>
 
 <p>
     @if(Request.IsAuthenticated) {
@@ -16,8 +18,6 @@
         to create or modify Monster entries.</text>
     }
 </p>
-
-@Html.ActionLink("Quick List", "QuickIndex") 
 
 <table>
     <tr>
@@ -42,7 +42,7 @@
 @foreach (var item in Model)
 {
     <tr>
-        <td>
+        <td style="text-align: center">
             @if (item.ImgThumb != null) {
                 <img src="data:image;base64,@System.Convert.ToBase64String(item.ImgThumb)" /> }
         </td>
