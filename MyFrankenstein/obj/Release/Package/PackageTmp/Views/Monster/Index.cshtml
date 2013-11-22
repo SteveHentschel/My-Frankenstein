@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MyFrankenstein.Models.Monster>
+
+@{
+    ViewBag.Title = "My Frankenstein - List";
+}
+
+<img src="@Url.Content("~/Content/Images/MF-Lists-Frank.jpg")" style="float:right; height:105px" />
+<h2>Monster List</h2> 
+<span id="list-links">@Html.ActionLink("Quick List", "QuickIndex")</span>
+
+<p>
+    @if(Request.IsAuthenticated) {
+        @Html.ActionLink("Create New Monster", "Create")
+    }
+    else
+    {
+        <text>Please @Html.ActionLink("Log On", "LogOn", "Account", new { returnUrl = HttpContext.Current.Request.RawUrl }, new { Area = "" })
+        to create or modify Monster entries.</text>
+    }
+</p>
+
+<table>
+    <tr>
+        <th>
+            Thumbnail
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Family
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Contributor
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td style="text-align: center">
+            @if (item.ImgThumb != null) {
+                <img src="data:image;base64,@System.Convert.ToBase64String(item.ImgThumb)" /> }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Family)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contributor)
+        </td>
+        <td>
+            @if(Request.IsAuthenticated && User.Identity.Name == item.Contributor) {
+                <text>@Html.ActionLink("Edit", "Edit", new { id = item.MonsterID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MonsterID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MonsterID })</text>
+            }
+            else {
+                <text>Edit | @Html.ActionLink("Details", "Details", new { id = item.MonsterID }) | Delete</text>
+            }
+        </td>
+    </tr>
+}
+
+</table>

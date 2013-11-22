@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MyFrankenstein.Models.Monster>
+
+@{
+    ViewBag.Title = "My Frankenstein - QuickList";
+}
+
+@section PageScripts{
+    <link href="/Content/demo_table.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.dataTables.1.8.2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("table").dataTable();
+        });
+    </script>
+}
+<img src="@Url.Content("~/Content/Images/MF-Lists-Frank.jpg")" style="float:right; height:100px" />
+<h2>Monster Quick List</h2> 
+<span id="list-links">@Html.ActionLink("Standard List", "Index")</span>  
+
+<p>
+    @if(Request.IsAuthenticated) {
+        @Html.ActionLink("Create New Monster", "Create")
+    }
+    else
+    {
+        <text>Please @Html.ActionLink("Log On", "LogOn", "Account", new { returnUrl = HttpContext.Current.Request.RawUrl }, new { Area = "" })
+        to create or modify Monster entries.</text>
+    }
+</p>
+
+<table class="display">
+    <thead>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Family
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Image File
+        </th>
+        <th>
+            Contributor
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @item.Family
+        </td>
+        <td>
+            @item.Description
+        </td>
+        <td>
+            @item.ImgName
+        </td>
+        <td>
+            @item.Contributor
+        </td>
+        <td>
+            @if(Request.IsAuthenticated && User.Identity.Name == item.Contributor) {
+                <text>@Html.ActionLink("Edit", "Edit", new { id = item.MonsterID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MonsterID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MonsterID })</text>
+            }
+            else {
+                <text>Edit | @Html.ActionLink("Details", "Details", new { id = item.MonsterID }) | Delete</text>
+            }
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+

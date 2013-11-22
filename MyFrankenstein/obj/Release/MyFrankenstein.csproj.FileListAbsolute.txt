@@ -1,0 +1,8 @@
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\bin\MyFrankenstein.dll
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\bin\MyFrankenstein.pdb
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\bin\EntityFramework.dll
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\bin\EntityFramework.xml
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\obj\Release\MyFrankenstein.dll
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\obj\Release\MyFrankenstein.pdb
+C:\Documents and Settings\All\my documents\visual studio 2010\Projects\MyFrankenstein\MyFrankenstein\bin\Properties\PublishProfiles\myfrankenstein.net - Web Deploy (2).pubxml

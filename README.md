@@ -3,6 +3,12 @@ My-Frankenstein
 
 My first pet project: a Monster Database using C# .NET MVC3 w/ SQL Express in Visual Studio 2010.
 
+MF Rev 1.5.0 -- (11/21/13)
+- Deploy finished; only minor issues, easily fixed (Praise be to Arvixe and VS Web Deploy!)
+- One suggestion: don't mess with db's in App_Data, especially user instances.
+- Fixed some minor styling issues seen on non-Firefox browsers (checked IE and Chrome).
+- That's it for now; any suggestions or issues, send an email to slhcoding@gmail.com.  slh
+
 MF Rev 1.4.0 -- (11/20/13)
 - Done with beautifying (harder than expected); lots of nit-picky stuff in css and views.
 - Changed color scheme and added static site images.

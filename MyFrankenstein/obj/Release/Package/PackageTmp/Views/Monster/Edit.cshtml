@@ -1,0 +1,68 @@
+﻿@model MyFrankenstein.Models.Monster
+
+@{
+    ViewBag.Title = "My Frankenstein - Edit";
+}
+
+<h2>Edit Your Monster</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("Edit", "Monster", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{  
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true,"Hmmm, there seems to be a problem ...")
+
+    <fieldset>
+        <legend>Monster Mash</legend>
+
+        @Html.HiddenFor(model => model.MonsterID)
+        @Html.HiddenFor(model => model.Contributor)
+        @Html.HiddenFor(model => model.ImgName)
+        @Html.HiddenFor(model => model.ImgThumb)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name, new { style = "width: 275px;" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Family)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Family, new { style = "width: 275px;" })
+            @Html.ValidationMessageFor(model => model.Family)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+            <span style = "font-size: 0.9em; padding-left: 10px">(500 char max)</span>
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description, new { style = "width: 400px; height: 150px" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div style="margin: 1em 0 0 0">
+            <strong>Current @Html.LabelFor(model => model.ImgName):</strong>  @Model.ImgName
+        </div>
+        <div class="editor-field">
+            <strong>Change:  </strong>@Html.TextBox("file", "", new { type = "file" }) 
+        </div>
+
+        @Html.HiddenFor(model => model.ImgUrl)       
+        @Html.HiddenFor(model => model.ImgType)
+
+        <p style = "margin: 25px 0 0 0">
+            <input type="submit" value="Update" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
